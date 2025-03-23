@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Simple S3 Bucket CloudFormation Template
+
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "my-unique-bucket-${AWS::AccountId}-${AWS::Region}-${AWS::StackName}" #Generates a unique bucket name
+      VersioningConfiguration:
+        Status: Enabled #Enables versioning
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        RestrictPublicBuckets: true
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256 #Enables AES256 server side encryption.
+
+Outputs:
+  BucketName:
+    Description: The name of the created S3 bucket.
+    Value: !Ref MyS3Bucket
+  BucketArn:
+    Description: The ARN of the created S3 bucket.
+    Value: !GetAtt MyS3Bucket.Arn
