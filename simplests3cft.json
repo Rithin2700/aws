@@ -5,7 +5,7 @@
     "MyS3Bucket": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
-        "BucketName": "my-bucket"
+        "BucketName": "my-bucket-2025"
       }
     }
   }
